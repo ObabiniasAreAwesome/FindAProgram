@@ -1,0 +1,15 @@
+body { 
+    font-family: sans-serif; 
+    margin: 2em; 
+    background-color: #a3cef1;
+    color: #6096ba;
+}
+.program {
+    border: 2px solid #a3cef1;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 15px 0;
+    background-color: #e7ecef;
+}
+.program h2 { margin-top: 0; }
+input { width: 100%; padding: 0.5em; font-size: 1.2em; margin-bottom:1em}
