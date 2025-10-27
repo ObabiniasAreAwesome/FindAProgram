@@ -1,8 +1,19 @@
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/IBM_Plex_Mono,Poppins,Red_Hat_Display,Space_Mono/Poppins/Poppins-Regular.ttf");
+}
+@font-face {
+    font-family: "IBM_Plex_Mono";
+    src: url("fonts/IBM_Plex_Mono,Poppins,Red_Hat_Display,Space_Mono/IBM_Plex_Mono/IBMPlexMono-SemiBold.ttf");
+}
 body { 
-    font-family: sans-serif; 
+    font-family: "Poppins", sans-serif; 
     margin: 2em; 
     background-color: #a3cef1;
     color: #6096ba;
+}
+.Heading{
+    align-items: center;
 }
 .program {
     border: 2px solid #a3cef1;
@@ -11,5 +22,18 @@ body {
     margin: 15px 0;
     background-color: #f2f9fd;
 }
-.program h2 { margin-top: 0; }
-input { width: 100%; padding: 0.5em; font-size: 1.2em; margin-bottom:1em}
+.program h2 { 
+    margin-top: 0;
+    font-family: "IBM_Plex_Mono", sans-serif;
+}
+input { 
+    width: 97%; 
+    padding: 0.5em; 
+    font-size: 1.2em; 
+    margin-bottom:1em
+}
+h1 {
+    color: #274c77;
+    font-size: 48px;
+    font-family: "IBM_Plex_Mono", sans-serif;
+}
