@@ -7,33 +7,62 @@
     src: url("fonts/IBM_Plex_Mono,Poppins,Red_Hat_Display,Space_Mono/IBM_Plex_Mono/IBMPlexMono-SemiBold.ttf");
 }
 body { 
+    background-image: url("imgs/indexBg3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: "Poppins", sans-serif; 
     margin: 2em; 
-    background-color: #a3cef1;
-    color: #6096ba;
+    /*background-color: #a3cef1;
+    color: #6096ba;*/
 }
-.Heading{
+div {
     align-items: center;
+    justify-content: center;
 }
 .program {
     border: 2px solid #a3cef1;
     border-radius: 10px;
     padding: 10px;
     margin: 15px 0;
-    background-color: #f2f9fd;
+    background-color: #f2f9fd99;
+    color:#6096ba;
 }
 .program h2 { 
     margin-top: 0;
     font-family: "IBM_Plex_Mono", sans-serif;
+    color: #274c77;
 }
 input { 
-    width: 97%; 
+    width: 90%; 
     padding: 0.5em; 
     font-size: 1.2em; 
-    margin-bottom:1em
+    margin-bottom:1em;
+    color: #274c77;
+    font-family: "Poppins";
+    border-color: #274c77;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 15px;
+    background-color: #f2f9fd80;
 }
 h1 {
     color: #274c77;
     font-size: 48px;
     font-family: "IBM_Plex_Mono", sans-serif;
+    text-align: center;
+}
+.center {
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+.scroll {
+    height: 710px;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+.top {
+    text-align: center;
 }
