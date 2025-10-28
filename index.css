@@ -66,3 +66,16 @@ h1 {
 .top {
     text-align: center;
 }
+.button {
+    text-decoration: none; 
+    display: inline-block;
+    padding: 7px 13px;
+    background-color: #274c77;
+    color: white;
+    border-radius: 5px;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+    margin-left: 200px;
+}
