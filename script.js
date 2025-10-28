@@ -42,3 +42,14 @@ document.addEventListener('DOMContentLoaded', () => {
         displayResults(filtered);
     });
 });
+function calendar(){
+  const title = "STEM Workshop";
+  const details = "Join our STEM workshop for high school students!";
+  const location = "Online";
+  const start = "20251101T170000Z"; // 2025-11-01 10:00 AM PDT (UTC time)
+  const end = "20251101T180000Z";   // 2025-11-01 11:00 AM PDT
+
+  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
+
+  window.open(url, "_blank");
+};

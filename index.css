@@ -79,3 +79,17 @@ h1 {
     font-size: 20px;
     margin-left: 200px;
 }
+.submit {
+    width: 100px;
+    background-color: #f2f9fd;
+}
+.EmailDiv {
+    display: flex;
+    width: 100%;
+    gap: 100px;
+    align-items: center;
+    justify-content: center;
+}
+.emailInput {
+    width: 600px;
+}
