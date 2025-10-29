@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayResults(filtered);
     });
 });
-function calendar(){
+function addEvent(){
   const title = "STEM Workshop";
   const details = "Join our STEM workshop for high school students!";
   const location = "Online";

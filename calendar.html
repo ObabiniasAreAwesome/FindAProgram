@@ -4,18 +4,23 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <div style="align-items: center; justify-content: center;">
-    <form class="EmailDiv">
-        <label for="email">Email:</label><br>
-        <input type="text" class="emailInput" name="email" placeholder="john.doe@example.com"><br><br>
-        <input class="submit" value="Submit">
+    <form class="EmailDiv" onsubmit="emailSend(event)">
+        <p style="font-size: 30px; text-align: center; align-items: center;">Email:</p>
+        <input id="emailAddress" type="text" class="emailInput" name="email" placeholder="john.doe@example.com"></input>
+        <button class="button">Submit</button>
     </form>
-    <iframe 
-        src="https://calendar.google.com/calendar/embed?src=seratesarah%40gmail.com&ctz=America%2FLos_Angeles"
-        style="border: 0" 
-        width="1000" 
-        height="750" 
-        frameborder="0" 
-        scrolling="no">
-    </iframe>
+    <div id="calendar" style="display: flex">
+        <iframe 
+            id="calendarFrame"
+            src="https://calendar.google.com/calendar/embed?src=youremail%40gmail.com&ctz=America%2FLos_Angeles"
+            style="border: 0"
+            width="90%" 
+            height="750em" 
+            frameborder="0"
+            justify-content="center"
+            scrolling="no">
+        </iframe>
+    </div>
 </div>
+<script src="calendar.js"></script>
 </html>
