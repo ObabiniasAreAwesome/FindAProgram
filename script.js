@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Eligibility:</strong> ${p.eligibility_criteria}</p>
                 <p><strong>Cost:</strong> ${p.cost}</p>
                 <p><strong>Tags:</strong> ${tags}</p>
+                <p><strong>Program Link:</strong><a href=${p.url}> ${p.url}</a></p>
+                <p><strong>Application Deadline:</strong> ${p.application_deadline}</p.
             `;
             resultsDiv.appendChild(programEl);
         });
