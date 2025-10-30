@@ -55,3 +55,42 @@ function addEvent(){
 
   window.open(url, "_blank");
 };
+function getStart(program){
+    const response = await fetch('programs.json');
+    const programs = await response.json();
+    const rawData = program.start_date;
+    if (!rawDate){
+        return null;
+    }
+    const parsedDate = new satisfies(rawData);
+    const year = parsedDate.getUTCFullYear();
+    const month = String(parsedDate.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(parsedDate.getUTCDate()).padStart(2, "0");
+    const hours = String(parsedDate.getUTCHours()).padStart(2, "0");
+    const minutes = String(parsedDate.getUTCMinutes()).padStart(2, "0");
+    const seconds = String(parsedDate.getUTCSeconds()).padStart(2, "0");
+    const formattedDate = `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+
+    return formattedDate;
+};
+async function selectProgram(programName) {
+    let start, deadLine;
+    try {
+        const response = await fetch('programs.json');
+        const programs = await response.json();
+
+        const program = programs.find(
+            p => p.program_name.toLowerCase() === programName.toLowerCase()
+        );
+        if (!program) {
+            alert("Program not found");
+            return null;
+        } else{
+            return { start, deadLone}
+        }
+    } catch (error) {
+        console.error("Error selecting program:", error);
+    }
+    start = getStart(program);
+    //deadLine = getDeadline(program);
+};
