@@ -6,8 +6,12 @@
     font-family: "IBM_Plex_Mono";
     src: url("fonts/IBM_Plex_Mono,Poppins,Red_Hat_Display,Space_Mono/IBM_Plex_Mono/IBMPlexMono-SemiBold.ttf");
 }
+@font-face {
+  font-family: "Arsenica";
+  src: url("fonts/arsenica/ArsenicaTrial-Regular.ttf")
+}
 body { 
-    background-image: url("imgs/indexBg3.jpg");
+    background-image: url("imgs/bg7.png");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: "Poppins", sans-serif; 
@@ -46,9 +50,9 @@ input {
     background-color: #f2f9fd80;
 }
 h1 {
-    color: #274c77;
+    color: #f2f9fd;
     font-size: 48px;
-    font-family: "IBM_Plex_Mono", sans-serif;
+    font-family: "Arsenica", sans-serif;
     text-align: center;
 }
 .center {
