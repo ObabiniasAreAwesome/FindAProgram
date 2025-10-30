@@ -1,4 +1,3 @@
-
 function emailSend(event) {
     event.preventDefault(); 
     const userEmail = document.getElementById('emailAddress').value.trim();

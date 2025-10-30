@@ -26,9 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Cost:</strong> ${p.cost}</p>
                 <p><strong>Tags:</strong> ${tags}</p>
                 <p><strong>Program Link:</strong><a href=${p.url}> ${p.url}</a></p>
-                <p><strong>Application Deadline:</strong> ${p.application_deadline}</p.
+                <p><strong>Application Deadline:</strong> ${p.application_deadline}</p>
+                <button class="calendar-btn" data-program="${p.program_name}">Add to Google Calendar</button>
             `;
             resultsDiv.appendChild(programEl);
+            
+            
+        });
+        const buttons = document.querySelectorAll('.calendar-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const programName = e.target.getAttribute('data-program');
+                selectProgram(programName);
+            });
         });
     }
 
@@ -44,53 +54,80 @@ document.addEventListener('DOMContentLoaded', () => {
         displayResults(filtered);
     });
 });
-function addEvent(){
-  const title = "STEM Workshop";
-  const details = "Join our STEM workshop for high school students!";
-  const location = "Online";
-  const start = "20251101T170000Z"; // 2025-11-01 10:00 AM PDT (UTC time)
-  const end = "20251101T180000Z";   // 2025-11-01 11:00 AM PDT
+async function getStart(program) {
+  const debugButton = document.getElementById("debugButton");
+  const rawDate = program.start_date;
 
-  const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
+  if (!rawDate) {
+    alert("No start date found for this program.");
+    return null;
+  }
 
-  window.open(url, "_blank");
-};
-function getStart(program){
+  debugButton.innerHTML = "Running getStart()...";
+
+  const parsedDate = new Date(rawDate); 
+
+  if (isNaN(parsedDate)) {
+    alert("Invalid start date format.");
+    return null;
+  }
+
+  const year = parsedDate.getUTCFullYear();
+  const month = String(parsedDate.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(parsedDate.getUTCDate()).padStart(2, "0");
+  const hours = String(parsedDate.getUTCHours()).padStart(2, "0");
+  const minutes = String(parsedDate.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(parsedDate.getUTCSeconds()).padStart(2, "0");
+  const formattedDate = `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+
+  debugButton.innerHTML = "Success!";
+  return formattedDate;
+}
+
+
+async function selectProgram(programName) {
+  const debugButton = document.getElementById("debugButton");
+
+  try {
     const response = await fetch('programs.json');
     const programs = await response.json();
-    const rawData = program.start_date;
-    if (!rawDate){
-        return null;
-    }
-    const parsedDate = new satisfies(rawData);
-    const year = parsedDate.getUTCFullYear();
-    const month = String(parsedDate.getUTCMonth() + 1).padStart(2, "0");
-    const day = String(parsedDate.getUTCDate()).padStart(2, "0");
-    const hours = String(parsedDate.getUTCHours()).padStart(2, "0");
-    const minutes = String(parsedDate.getUTCMinutes()).padStart(2, "0");
-    const seconds = String(parsedDate.getUTCSeconds()).padStart(2, "0");
-    const formattedDate = `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
 
-    return formattedDate;
-};
-async function selectProgram(programName) {
-    let start, deadLine;
-    try {
-        const response = await fetch('programs.json');
-        const programs = await response.json();
+    const program = programs.find(
+      p => p.program_name.toLowerCase() === programName.toLowerCase()
+    );
 
-        const program = programs.find(
-            p => p.program_name.toLowerCase() === programName.toLowerCase()
-        );
-        if (!program) {
-            alert("Program not found");
-            return null;
-        } else{
-            return { start, deadLone}
-        }
-    } catch (error) {
-        console.error("Error selecting program:", error);
+    if (!program) {
+      alert("Program not found.");
+      return;
     }
-    start = getStart(program);
-    //deadLine = getDeadline(program);
-};
+
+    // Get the formatted start date (UTC string like 20250609T170000Z)
+    const start = await getStart(program);
+
+    if (!start) {
+      alert("No valid start date for this program.");
+      return;
+    }
+
+    // Default: 1-hour event after start time
+    const startDate = new Date(program.start_date);
+    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
+    const end = `${endDate.getUTCFullYear()}${String(endDate.getUTCMonth() + 1).padStart(2, '0')}${String(endDate.getUTCDate()).padStart(2, '0')}T${String(endDate.getUTCHours()).padStart(2, '0')}${String(endDate.getUTCMinutes()).padStart(2, '0')}00Z`;
+
+    // Build Google Calendar URL
+    const title = encodeURIComponent(program.program_name);
+    const details = encodeURIComponent(program.summary || "");
+    const location = encodeURIComponent(program.location || "");
+
+    const calendarURL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}&sf=true&output=xml`;
+
+    console.log("Redirecting to:", calendarURL);
+    debugButton.innerHTML = "Redirecting to Google Calendar...";
+
+    window.open(calendarURL, "_blank");
+
+  } catch (error) {
+    console.error("Error selecting program:", error);
+    debugButton.innerHTML = "Error fetching program data." + error;
+  }er
+}
