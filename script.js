@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const resultsDiv = document.getElementById('results');
     let programs = [];
-    const debugButton = document.getElementById("debugButton");
+    //const debugButton = document.getElementById("debugButton");
     // Load the JSON data
     fetch('programs.json')
         .then(response => response.json())
@@ -53,37 +53,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 async function getStart(program) {
-  const debugButton = document.getElementById("debugButton");
-  const rawDate = program.start_date;
+  //const debugButton = document.getElementById("debugButton");
+  const rawDate = program.start_date?.trim();
 
   if (!rawDate) {
-    alert("No start date found for this program.");
     return null;
   }
 
   //debugButton.innerHTML = "Running getStart()...";
-  const parsedDate = new Date(rawDate); 
 
-  if (!isNaN(parsedDate)) {
-    alert("Invalid start date format.");
+  // Try parsing manually (handles formats like "June 9, 2025")
+  let parsedDate = new Date(rawDate);
+
+  if (isNaN(parsedDate)) {
+    // Try custom parser for cases like "June 9, 2025" or "9 June 2025"
+    const match = rawDate.match(/([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4})/);
+    if (match) {
+      const [_, monthName, day, year] = match;
+      const months = {
+        january: 0, february: 1, march: 2, april: 3, may: 4, june: 5,
+        july: 6, august: 7, september: 8, october: 9, november: 10, december: 11
+      };
+      const monthIndex = months[monthName.toLowerCase()];
+      if (monthIndex !== undefined) {
+        parsedDate = new Date(Date.UTC(year, monthIndex, day, 17, 0, 0)); // 17:00 UTC = 10 AM PDT
+      }
+    }
+  }
+
+  if (isNaN(parsedDate)) {
+    // alert(`Invalid start date format: "${rawDate}"`);
     return null;
   }
-  debugButton.innerHTML = parsedDate;
+
+  // Convert to Google Calendar format
   const year = parsedDate.getUTCFullYear();
   const month = String(parsedDate.getUTCMonth() + 1).padStart(2, "0");
   const day = String(parsedDate.getUTCDate()).padStart(2, "0");
   const hours = String(parsedDate.getUTCHours()).padStart(2, "0");
   const minutes = String(parsedDate.getUTCMinutes()).padStart(2, "0");
-  const seconds = String(parsedDate.getUTCSeconds()).padStart(2, "0");
-  const formattedDate = `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
+  const formattedDate = `${year}${month}${day}T${hours}${minutes}00Z`;
 
   //debugButton.innerHTML = "Success!";
   return formattedDate;
 }
 
-
 async function selectProgram(programName) {
-  const debugButton = document.getElementById("debugButton");
+  //const debugButton = document.getElementById("debugButton");
 
   try {
     const response = await fetch('programs.json');
@@ -102,7 +118,7 @@ async function selectProgram(programName) {
     const start = await getStart(program);
 
     if (!start) {
-      alert("No valid start date for this program.");
+      alert("Sorry, no start date found for this program. So it can't be added to the calendar.");
       return;
     }
 
