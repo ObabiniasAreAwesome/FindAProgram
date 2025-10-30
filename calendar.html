@@ -4,11 +4,14 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <div style="align-items: center; justify-content: center;">
-    <form class="EmailDiv" onsubmit="emailSend(event)">
-        <p style="font-size: 30px; text-align: center; align-items: center;">Email:</p>
-        <input id="emailAddress" type="text" class="emailInput" name="email" placeholder="john.doe@example.com"></input>
-        <button class="button">Submit</button>
-    </form>
+    <div class="email-container">
+        <form class="EmailDiv" onsubmit="emailSend(event)">
+            <p>Email:</p>
+            <input id="emailAddress" type="text" class="emailInput" name="email" placeholder="john.doe@example.com">
+            <button class="button" type="submit">Submit</button>
+        </form>
+        <a href="index.html" class="programs-btn">Programs</a>
+    </div>
     <div id="calendar" style="display: flex">
         <iframe 
             id="calendarFrame"
