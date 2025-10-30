@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const resultsDiv = document.getElementById('results');
     let programs = [];
-
+    const debugButton = document.getElementById("debugButton");
     // Load the JSON data
     fetch('programs.json')
         .then(response => response.json())
@@ -29,9 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p><strong>Application Deadline:</strong> ${p.application_deadline}</p>
                 <button class="calendar-btn" data-program="${p.program_name}">Add to Google Calendar</button>
             `;
-            resultsDiv.appendChild(programEl);
-            
-            
+            resultsDiv.appendChild(programEl); 
         });
         const buttons = document.querySelectorAll('.calendar-btn');
         buttons.forEach(btn => {
@@ -63,15 +61,14 @@ async function getStart(program) {
     return null;
   }
 
-  debugButton.innerHTML = "Running getStart()...";
-
+  //debugButton.innerHTML = "Running getStart()...";
   const parsedDate = new Date(rawDate); 
 
-  if (isNaN(parsedDate)) {
+  if (!isNaN(parsedDate)) {
     alert("Invalid start date format.");
     return null;
   }
-
+  debugButton.innerHTML = parsedDate;
   const year = parsedDate.getUTCFullYear();
   const month = String(parsedDate.getUTCMonth() + 1).padStart(2, "0");
   const day = String(parsedDate.getUTCDate()).padStart(2, "0");
@@ -80,7 +77,7 @@ async function getStart(program) {
   const seconds = String(parsedDate.getUTCSeconds()).padStart(2, "0");
   const formattedDate = `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
 
-  debugButton.innerHTML = "Success!";
+  //debugButton.innerHTML = "Success!";
   return formattedDate;
 }
 
@@ -122,12 +119,12 @@ async function selectProgram(programName) {
     const calendarURL = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&details=${details}&location=${location}&sf=true&output=xml`;
 
     console.log("Redirecting to:", calendarURL);
-    debugButton.innerHTML = "Redirecting to Google Calendar...";
+    //debugButton.innerHTML = "Redirecting to Google Calendar...";
 
     window.open(calendarURL, "_blank");
 
   } catch (error) {
     console.error("Error selecting program:", error);
-    debugButton.innerHTML = "Error fetching program data." + error;
-  }er
+    //debugButton.innerHTML = "Error fetching program data." + error;
+  }
 }
