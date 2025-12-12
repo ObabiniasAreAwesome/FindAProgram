@@ -1,4 +1,5 @@
 Find a program is a web app made from basic html/css/js for students to quickly find programs related to their interests. To make it me and my partner had to scrape a lot of data from the internet and put it into a json file that can be interpreted by the js. It has a search bar with specific tags to easily find related programs. It integrates the google calendar api so that students can sync and organize their programs. It also has an add to calendar button where students can automatically save the program to their google calendar with all the information filled out. It also has an embedded google doc with student resources we have found. 
 As students, finding programs and opportunities is a tedious process. There are so many programs out there it is easy to lose track of the ones youa re interested in. So Find a program is the solution with its simplistic user interface finding summer programs is a breeze!
 We struggled the most with integrating the google calendar api because we had to make the data from the json able to be translated into a calendar event that the user can add to their calendar.
-We hope you find it useful!
+We hope you find it useful
+
