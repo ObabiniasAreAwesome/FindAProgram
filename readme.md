@@ -3,3 +3,5 @@ As students, finding programs and opportunities is a tedious process. There are 
 We struggled the most with integrating the google calendar api because we had to make the data from the json able to be translated into a calendar event that the user can add to their calendar.
 We hope you find it useful
 
+
+https://opabiniasareawesome.github.io/FindAProgram/ to use it
